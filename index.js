@@ -17,8 +17,18 @@ app.get("/", async (req, res) => {
   let totalLength = await postmodel.find();
   let page = +(req.query.page) || 1;
   let skip = (page - 1) * 4;
+  console.log(req.query.filter)
+  if(req.query.filter){
+    console.log("B")
+    let p=req.query.filter
+    let data = await postmodel.find({category:p}).skip(skip).limit(4);
+    console.log(data.length)
+    res.send({data:data,total:totalLength});
+}else{
+    console.log("A")
   let data = await postmodel.find().skip(skip).limit(4);
   res.send({data:data,total:totalLength});
+}
 });
 
 app.post("/post", async (req, res) => {
