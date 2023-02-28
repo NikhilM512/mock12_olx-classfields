@@ -38,7 +38,7 @@ app.delete("/delete/:id", async (req, res) => {
   res.send({ res:r, msg: "Deleted sucessfully" });
 });
 
-app.listen(PORT, async () => {
+app.listen(8080, async () => {
   try {
     await connection;
     console.log("connect ot DB");
